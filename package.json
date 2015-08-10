@@ -1,0 +1,16 @@
+{
+    "name": "nodebb-plugin-gif-controls",
+    "version": "0.0.1",
+    "description": "Adds controls to gif images",
+    "main": "plugin.js",
+    "keywords": [
+        "nodebb",
+        "lavender",
+        "plugins"
+    ],
+    "author": {
+        "name": "sergushakov",
+        "email": "sergushakov.public@gmail.com"
+    },
+    "license": "BSD-2-Clause"
+}
