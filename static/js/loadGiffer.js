@@ -18,7 +18,12 @@ function processGif(x) {
 function processContainer(x) {
     'use strict';
     if (x.nodeType !== 1) return;
-    var selectors = [".post-preview-content .content", ".category-body .row .col-md-12", ".topic-text .post-content"],
+    var selectors = [
+            ".post-preview-content .content",
+            ".category-body .row .col-md-12",
+            ".topic-text .post-content",
+            ".posts-list-item .content"
+        ],
         DEBUG = false
     ;
     selectors.forEach(function(y) {
