@@ -1,6 +1,55 @@
-var Giffer = function(){
+function processGif(x) {
+    'use strict';
+    var DEBUG = false;
+    if (!x.processed && x.nodeType === 1) {
+        if (x.nodeName === "IMG" && x.src.match(/\.gif/)) {
+            if (DEBUG) {
+                x.style.border = "3px solid red";
+            } else {
+                x.style.display = "none";
+                x.dataset.gifffer = x.src;
+                Giffer([x]);
+            }
+        }
+        x.processed = true;
+    }
+}
+
+function processContainer(x) {
+    'use strict';
+    if (x.nodeType !== 1) return;
+    var selectors = [".post-preview-content .content", ".category-body .row .col-md-12", ".topic-text .post-content"],
+        DEBUG = false
+    ;
+    selectors.forEach(function(y) {
+        var els = x.querySelectorAll(y);
+        if (els && els.length > 0) {
+            Array.prototype.forEach.call(els, function(el) {
+                if (DEBUG) console.log("container found", el.classList, " children: ", el.querySelectorAll("img").length);
+                Array.prototype.forEach.call(el.querySelectorAll("img"),processGif);
+            })
+        }
+    });
+}
+
+var processObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        switch (mutation.type) {
+            case "childList":
+                processContainer(mutation.target);
+                Array.prototype.forEach.call(mutation.addedNodes, function (x) {
+                    processContainer(x);
+                });
+                break;
+        }
+    });
+});
+processObserver.observe(document, { childList: true, subtree: true });
+
+
+var Giffer = function(params){
   var images, d = document, ga = 'getAttribute', sa = 'setAttribute';
-  images = d && d.querySelectorAll ? d.querySelectorAll('[data-gifffer]') : [];
+  images = (params && params.images) ? params.images : d.querySelectorAll('[data-gifffer]');
   var createContainer = function(w, h, el) {
       var con = d.createElement('DIV'), cls = el[ga]('class'), id = el[ga]('id');
       cls ? con[sa]('class', el[ga]('class')) : null;
@@ -80,20 +129,3 @@ var Giffer = function(){
       }
   for(i; i<imglen; ++i) process(images[i]);
 };
-
-$(window).on('action:ajaxify.end', function(event, data) {
-    var selectors = [".post-preview .post-preview-content img",".category-body .col-md-12 img",".topic-text .post-content img"];
-    selectors.forEach(function(selector) {
-        Array.prototype.forEach.call(document.querySelectorAll(selector), function(x){
-            if (x.src.match(/\.gif/)) {
-                x.dataset.gifffer = x.src;
-                x.setAttribute("src","");
-            }
-        });
-    });
-    Giffer();
-    selectors.forEach(function(selector){
-        var x = document.querySelector(selector);
-        if (x) x.classList.add("visible-gif");
-    });
-});
