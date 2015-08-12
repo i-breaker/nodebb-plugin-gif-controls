@@ -5,12 +5,11 @@
     "main": "plugin.js",
     "keywords": [
         "nodebb",
-        "lavender",
         "plugins"
     ],
     "author": {
-        "name": "sergushakov",
+        "name": "Sergey Ushakov",
         "email": "sergushakov.public@gmail.com"
     },
-    "license": "BSD-2-Clause"
+    "license": "MIT"
 }

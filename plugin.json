@@ -1,4 +1,4 @@
 {
     "id": "nodebb-plugin-gif-controls",
-    "scripts": ["static/js/loadGiffer.js"]
+    "scripts": ["plugin.js"]
 }

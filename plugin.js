@@ -1,3 +1,14 @@
+/*
+  * Author: Sergey Ushakov <sergushakov.public@gmail.com> *
+  * Source: https://github.com/i-breaker/nodebb-plugin-gif-controls.git *
+  * License: MIT *
+*/
+
+/**
+ * processing existed gifs with Giffer function
+ * @param {Node} x - DOM node for processing
+ */
+
 function processGif(x) {
     'use strict';
     var DEBUG = false;
@@ -14,6 +25,11 @@ function processGif(x) {
         x.processed = true;
     }
 }
+
+/**
+ * processes gifs for the container if the container matches queries
+ * @param {Node} x - DOM node for processing
+ */
 
 function processContainer(x) {
     'use strict';
@@ -37,7 +53,8 @@ function processContainer(x) {
     });
 }
 
-var processObserver = new MutationObserver(function (mutations) {
+new MutationObserver(function (mutations) {
+    'use strict';
     mutations.forEach(function (mutation) {
         switch (mutation.type) {
             case "childList":
@@ -48,11 +65,15 @@ var processObserver = new MutationObserver(function (mutations) {
                 break;
         }
     });
-});
-processObserver.observe(document, { childList: true, subtree: true });
+}).observe(document, { childList: true, subtree: true });
 
+/*
+ * Author: krasimir
+ * Source: https://github.com/krasimir/gifffer
+ * License: MIT
+ */
 
-var Giffer = function(params){
+function Giffer(params){
   var images, d = document, ga = 'getAttribute', sa = 'setAttribute';
   images = (params && params.images) ? params.images : d.querySelectorAll('[data-gifffer]');
   var createContainer = function(w, h, el) {
