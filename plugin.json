@@ -3,5 +3,5 @@
     "name": "NodeBB plugin that adds controls to gif images",
     "url": "https://github.com/i-breaker/nodebb-plugin-gif-controls",
     "minver": "0.7.0",
-    "scripts": ["plugin.js"]
+    "scripts": ["plugin.js","vendor/mutationobserver.min.js"]
 }
