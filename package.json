@@ -7,6 +7,10 @@
         "nodebb",
         "plugins"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/i-breaker/nodebb-plugin-gif-controls"
+    },
     "author": {
         "name": "Sergey Ushakov",
         "email": "sergushakov.public@gmail.com"
